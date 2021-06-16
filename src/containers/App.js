@@ -9,12 +9,12 @@ import Error403 from "components/Error403";
 const App = ({match, location}) => {
 
   if (location.pathname === '/')
-    return <Redirect to={'/app'}/>;
+    return <Redirect to={'/pokemon-catch'}/>;
 
   return (
     <div className="app-main">
       <Switch>
-        <Route path={`${match.url}app`} component={MainApp}/>
+        <Route path={`${match.url}pokemon-catch`} component={MainApp}/>
         <Route path='/404' component={Error404}/>
         <Route path='/403' component={Error403}/>
       </Switch>
