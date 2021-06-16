@@ -1,4 +1,4 @@
-import api from 'util/Api'
+import api from '../util/Api'
 import {gql} from "@apollo/client";
 import {
   SHOW_MESSAGE,
@@ -17,7 +17,7 @@ const SUCCESS_RATE = 0.5;
 export const getAllPokemon = ({limit, offset}) => {
   return dispatch => {
     dispatch({type: UI_START_ACTION, name: GET_ALL_POKEMON});
-    api.query({
+    return api.query({
       query: gql`
         query pokemons($limit: Int, $offset: Int) {
           pokemons(limit: $limit, offset: $offset) {
@@ -57,7 +57,7 @@ export const getAllPokemon = ({limit, offset}) => {
 export const getPokemonDetail = ({name}) => {
   return dispatch => {
     dispatch({type: UI_START_ACTION, name: GET_ONE_POKEMON});
-    api.query({
+    return api.query({
       query: gql`
         query pokemon($name: String!) {
           pokemon(name: $name) {
@@ -125,26 +125,25 @@ export const getPokemonDetail = ({name}) => {
 
 export const catchPokemon = (pokemon) => {
   return dispatch => {
-    dispatch({type: UI_START_ACTION, name: CATCH_POKEMON});
-    setTimeout(() => {
-      const result = Math.random() < SUCCESS_RATE;
-      if (result)
-        dispatch({type: CATCH_POKEMON, payload: pokemon});
-      else
-        dispatch({type: CATCH_POKEMON, payload: false});
-      dispatch({type: UI_STOP_ACTION, name: CATCH_POKEMON});
-    }, 5000)
+    return new Promise((resolve, reject) => {
+      dispatch({type: UI_START_ACTION, name: CATCH_POKEMON});
+      setTimeout(() => {
+        const result = Math.random() < SUCCESS_RATE;
+        if (result)
+          dispatch({type: CATCH_POKEMON, payload: pokemon});
+        else
+          dispatch({type: CATCH_POKEMON, payload: false});
+        dispatch({type: UI_STOP_ACTION, name: CATCH_POKEMON});
+        resolve();
+      }, 5000)
+    });
   }
 };
 
 export const savePokemon = (nickname = '', pokemon = {}) => {
-  return dispatch => {
-    dispatch({type: SAVE_POKEMON, payload: {...pokemon, nickname}});
-  }
+  return {type: SAVE_POKEMON, payload: {...pokemon, nickname}}
 };
 
 export const releasePokemon = ({name, nickname}) => {
-  return dispatch => {
-    dispatch({type: RELEASE_POKEMON, name, nickname});
-  }
+  return {type: RELEASE_POKEMON, name, nickname}
 };
