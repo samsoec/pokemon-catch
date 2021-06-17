@@ -12,13 +12,13 @@ Visit [https://pokemon-catch-one.vercel.app](https://pokemon-catch-one.vercel.ap
 
 ## Features
 
-<p align="center">
-	<img src="public/screenshot-list.png" alt="List">
-	<img src="public/screenshot-detail.png" alt="Detail">
-	<img src="public/screenshot-catching.png" alt="Catching">
-	<img src="public/screenshot-caught.png" alt="Caught">
-	<img src="public/screenshot-owned.png" alt="Owned">
-</p>
+<div style="display: inline;">
+	<img src="public/screenshot-list.png" width="250" alt="List"/>
+	<img src="public/screenshot-detail.png" width="250" alt="Detail"/>
+	<img src="public/screenshot-catching.png" width="250" alt="Catching"/>
+	<img src="public/screenshot-caught.png" width="250" alt="Caught"/>
+	<img src="public/screenshot-owned.png" width="250" alt="Owned"/>
+</div>
 
 ## Credits
 
